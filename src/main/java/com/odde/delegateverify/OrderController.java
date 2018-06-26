@@ -2,9 +2,11 @@ package com.odde.delegateverify;
 
 public class OrderController {
     private final OrderModel orderModel;
+    private final SystemLogger logger;
 
-    public OrderController(OrderModel orderModel) {
+    public OrderController(OrderModel orderModel, SystemLogger logger) {
         this.orderModel = orderModel;
+        this.logger = logger;
     }
 
     public void save(Order order) {
@@ -13,12 +15,12 @@ public class OrderController {
 
     private void updateMessage(Order order)
     {
-        System.out.println(String.format("update order id:%d with %d successfully!", order.getId(), order.getAmount()));
+        logger.log(String.format("update order id:%d with %d successfully!", order.getId(), order.getAmount()));
     }
 
     private void insertMessage(Order order)
     {
-        System.out.println(String.format("insert order id:%d with %d successfully!", order.getId(), order.getAmount()));
+        logger.log(String.format("insert order id:%d with %d successfully!", order.getId(), order.getAmount()));
     }
 
     public void deleteAmountMoreThan100()
